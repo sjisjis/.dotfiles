@@ -17,8 +17,18 @@ RPROMPT="%1(v|%F{green}%1v%f|)"
 
 # alias export {{{
 export LSCOLORS=gxfxcxdxbxegedabagacad
+
+case ${OSTYPE} in 
+darwin*)
 alias ls='ls -G'
 alias ll='ls -la'
+;;
+*linux)
+alias ls='ls -G --color'
+alias ll='ls -la --color'
+;;
+esac
+
 alias grep="grep --color=auto"
 # }}}
 
