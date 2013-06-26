@@ -3,3 +3,7 @@
 .vim/.netrwhist
 .vim/bundle/*
 .vim/swp/*
+.vim/dict/*
+!.vim/dict/README.md
+.vim/refs/*
+!.vim/refs/README.md
