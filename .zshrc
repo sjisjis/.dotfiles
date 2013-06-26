@@ -48,4 +48,10 @@ bindkey "^S" history-incremental-pattern-search-forward
 # MqcPorts
 export PATH=/opt/local/bin:/opt/local/sbin:$PATH
 
+#mac image preview
+alias ql='qlmanage -p "$@" >& /dev/null'
+alias imgsize="mdls -name kMDItemPixelWidth -name kMDItemPixelHeight"
+
+#rvm
+PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting$
 
