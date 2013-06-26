@@ -1,0 +1,4 @@
+neobundle.vim
+neocomplcache.vim
+syntastic
+vim-ref
