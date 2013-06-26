@@ -23,13 +23,14 @@ darwin*)
 alias ls='ls -G'
 alias ll='ls -la'
 ;;
-*linux)
+linux*)
 alias ls='ls -G --color'
 alias ll='ls -la --color'
 ;;
 esac
 
 alias grep="grep --color=auto"
+alias vi='vim'
 # }}}
 
 # History {{{
