@@ -69,8 +69,8 @@ endif
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'scrooloose/syntastic'
-"NeoBundle 'Shougo/vimproc'
-"NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/unite.vim'
 "NeoBundle 'mattn/zencoding-vim'
 "NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
@@ -121,6 +121,27 @@ set statusline+=%*
 "vim-ref
 let g:ref_phpmanual_path = $HOME."/.vim/refs/php-chunked-xhtml"
 
+" unite.vim {{{ 
+"" 入力モードで開始する
+let g:unite_enable_start_insert=0
+"バッファ一覧
+noremap <C-Q><C-B> :Unite buffer<CR>
+" ファイル一覧
+noremap <C-Q><C-F> :UniteWithBufferDir -buffer-name=files file<CR>
+" 最近使ったファイルの一覧
+noremap <C-Q><C-R> :Unite file_mru<CR>
+" レジスタ一覧
+noremap <C-Q><C-Y> :Unite -buffer-name=register register<CR>
+" ファイルとバッファ
+noremap <C-Q><C-U> :Unite buffer file_mru<CR>
+" 全部
+noremap <C-Q><C-A> :Unite UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+" ESCキーを2回押すと終了する
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+" Unite-grep
+nnoremap <silent> ,ug :Unite grep:%:-iHRn<CR>
+" }}}
 " reference
 "http://subtech.g.hatena.ne.jp/cho45/20061010/1160459376
 " http://vim.wikia.com/wiki/Mac_OS_X_clipboard_sharing
