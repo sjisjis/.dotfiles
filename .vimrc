@@ -1,3 +1,9 @@
+"dependent {{{
+if filereadable( $HOME . "/.vimrc.dependent" )
+      source ~/.vimrc.dependent
+endif
+" }}}
+
 " Search {{{
 set incsearch "インクリメンタルサーチを行う
 set smartcase "検索時に大文字を含んでいたら大/小を区別
