@@ -1,6 +1,15 @@
+"dependent {{{
+if filereadable( $HOME . "/.vimrc.dependent" )
+      source ~/.vimrc.dependent
+endif
+" }}}
+
 " Search {{{
 set incsearch "インクリメンタルサーチを行う
 set smartcase "検索時に大文字を含んでいたら大/小を区別
+set wrapscan  "最後まで検索後最初に戻る
+set hlsearch  "ハイライト
+nnoremap <Esc><Esc> :<C-u>set nohlsearch<Return>
 " }}}
 
 " Configurations {{{
@@ -18,6 +27,7 @@ set listchars=eol:$,tab:>\ ,extends:< "listで表示される文字のフォー�
 set number "行番号を表示する
 hi Comment ctermfg=yellow "dddd
 set showmatch "閉じ括弧が入力されたとき、対応する括弧を表示する
+set wildmenu  "コマンドライン補完の強化
 
 "全角スペースを視覚化
 highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=#666666
@@ -49,6 +59,7 @@ set smarttab "行頭の余白内で Tab を打ち込むと、'shiftwidth' の数
 set shiftwidth=4 "シフト移動幅
 set smartindent "新しい行を作ったときに高度な自動インデントを行う
 set expandtab "タブの代わりに空白文字を挿入する
+set backspace=2 "deleteキー削除
 " }}}
 
 
@@ -69,8 +80,8 @@ endif
 NeoBundle 'Shougo/neocomplcache.vim'
 NeoBundle 'Shougo/neobundle.vim'
 NeoBundle 'scrooloose/syntastic'
-"NeoBundle 'Shougo/vimproc'
-"NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'Shougo/unite.vim'
 "NeoBundle 'mattn/zencoding-vim'
 "NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
@@ -121,6 +132,27 @@ set statusline+=%*
 "vim-ref
 let g:ref_phpmanual_path = $HOME."/.vim/refs/php-chunked-xhtml"
 
+" unite.vim {{{ 
+"" 入力モードで開始する
+let g:unite_enable_start_insert=0
+"バッファ一覧
+noremap <C-Q><C-B> :Unite buffer<CR>
+" ファイル一覧
+noremap <C-Q><C-F> :UniteWithBufferDir -buffer-name=files file<CR>
+" 最近使ったファイルの一覧
+noremap <C-Q><C-R> :Unite file_mru<CR>
+" レジスタ一覧
+noremap <C-Q><C-Y> :Unite -buffer-name=register register<CR>
+" ファイルとバッファ
+noremap <C-Q><C-U> :Unite buffer file_mru<CR>
+" 全部
+noremap <C-Q><C-A> :Unite UniteWithBufferDir -buffer-name=files buffer file_mru bookmark file<CR>
+" ESCキーを2回押すと終了する
+au FileType unite nnoremap <silent> <buffer> <ESC><ESC> :q<CR>
+au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
+" Unite-grep
+nnoremap <silent> ,ug :Unite grep:%:-iHRn<CR>
+" }}}
 " reference
 "http://subtech.g.hatena.ne.jp/cho45/20061010/1160459376
 " http://vim.wikia.com/wiki/Mac_OS_X_clipboard_sharing
