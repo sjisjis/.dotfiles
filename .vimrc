@@ -18,7 +18,7 @@ set hidden "変更中のファイルでも、保存しないで他のファイ�
 
 " Visualization {{{
 set ambiwidth=double
-set list "タブ文字、行末など不可視文字を表示する
+"set list "タブ文字、行末など不可視文字を表示する
 set listchars=eol:$,tab:>\ ,extends:< "listで表示される文字のフォーマットを指定する
 " }}}
 
@@ -42,8 +42,8 @@ augroup END
 
 "ターミナルでマウスを使用できるようにする
 set mouse=a
-set guioptions+=a
-set ttymouse=xterm2
+"set guioptions+=a
+"set ttymouse=xterm2
 " }}}
 
 " Backup & Swap {{{
