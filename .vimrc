@@ -124,10 +124,10 @@ let g:syntastic_echo_current_error = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_enable_highlighting = 1
 " php コマンドのオプションを上書かないと動かなかった
-let g:syntastic_php_php_args = '-l'
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"let g:syntastic_php_php_args = '-l'
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 
 "vim-ref
 let g:ref_phpmanual_path = $HOME."/.vim/refs/php-chunked-xhtml"
