@@ -1,3 +1,5 @@
+umask 002
+
 # 入力補完
 autoload -U compinit
 compinit
@@ -66,3 +68,6 @@ alias imgsize="mdls -name kMDItemPixelWidth -name kMDItemPixelHeight"
 #rvm
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting$
 
+#bin
+export PATH=~/bin:$PATH
+export EDITOR='subl -w'
