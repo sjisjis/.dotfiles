@@ -71,3 +71,8 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting$
 #bin
 export PATH=~/bin:$PATH
 export EDITOR='subl -w'
+
+#pythonbrew
+[[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc" 
+VIRTUALENVWRAPPER_PYTHON=py2.7.3
+source ~/.pythonbrew/bin/virtualenvwrapper.sh
