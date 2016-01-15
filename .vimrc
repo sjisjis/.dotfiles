@@ -40,6 +40,12 @@ autocmd InsertEnter * highlight StatusLine guifg=#ccdc90 guibg=#2E4340
 autocmd InsertLeave * highlight StatusLine guifg=#2E4340 guibg=#ccdc90
 augroup END
 
+augroup HighlightTrailingSpaces
+  autocmd!
+  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
+  autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
+augroup END
+
 "ターミナルでマウスを使用できるようにする
 set mouse=a
 "set guioptions+=a
@@ -85,11 +91,13 @@ NeoBundle 'Shougo/unite.vim'
 "NeoBundle 'mattn/zencoding-vim'
 "NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'thinca/vim-ref'
+NeoBundle 'heavenshell/vim-slack'
+NeoBundle 'mattn/webapi-vim'
 "
 ""Brief help
-":NeoBundleList          
+":NeoBundleList
 ""- list configured bundles
-":NeoBundleInstall!    
+":NeoBundleInstall!
 "- install(update) bundles
 ":NeoBundleClean(!)      "- confirm(or auto-approve) removal of unused
 ""bundles
@@ -123,6 +131,8 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_echo_current_error = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_enable_highlighting = 1
+"php
+let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 " php コマンドのオプションを上書かないと動かなかった
 "let g:syntastic_php_php_args = '-l'
 "set statusline+=%#warningmsg#
