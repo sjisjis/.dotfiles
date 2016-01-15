@@ -20,7 +20,7 @@ RPROMPT="%1(v|%F{green}%1v%f|)"
 # alias export {{{
 export LSCOLORS=gxfxcxdxbxegedabagacad
 
-case ${OSTYPE} in 
+case ${OSTYPE} in
 darwin*)
 alias ls='ls -G'
 alias ll='ls -la'
@@ -71,8 +71,37 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting$
 #bin
 export PATH=~/bin:$PATH
 export EDITOR='subl -w'
+export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.7"`
+PATH=${JAVA_HOME}/bin:${PATH}
+
+#docker-machine
+if type docker-machine > /dev/null 2>&1;
+    then eval "$(docker-machine env dev)"
+fi
+
+#php
+export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
+export PATH="/usr/local/sbin:$PATH"
+
+if [[ -s ~/.nvm/nvm.sh ]];
+  then source ~/.nvm/nvm.sh
+fi
 
 #pythonbrew
-[[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc" 
-VIRTUALENVWRAPPER_PYTHON=py2.7.3
-source ~/.pythonbrew/bin/virtualenvwrapper.sh
+if type pythonbrew > /dev/null 2>&1;
+  then
+    [[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
+    VIRTUALENVWRAPPER_PYTHON=py2.7.3
+    source ~/.pythonbrew/bin/virtualenvwrapper.sh
+fi
+
+export PATH="$PATH:/Users/shouji/Library/Android/sdk/tools"
+export PATH="$PATH:/Users/shouji/Library/Android/sdk/platform-tools"
+
+
+if [[ "$OSTYPE" =~ darwin ]];then
+  jscpath="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources"
+  if [ -f $jscpath/jsc ];then
+    export PATH=$PATH:$jscpath
+  fi
+fi
