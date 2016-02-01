@@ -131,6 +131,7 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_echo_current_error = 1
 let g:syntastic_auto_loc_list = 2
 let g:syntastic_enable_highlighting = 1
+let g:syntastic_html_tidy_exec = 'tidy5'
 "php
 let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 " php コマンドのオプションを上書かないと動かなかった

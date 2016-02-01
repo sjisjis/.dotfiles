@@ -76,6 +76,9 @@ PATH=${JAVA_HOME}/bin:${PATH}
 
 #docker-machine
 if type docker-machine > /dev/null 2>&1;
+#    if [[ `docker-machine status dev` -eq 'Stopped' ]];
+#        then docker-machine start dev;
+#    fi
     then eval "$(docker-machine env dev)"
 fi
 
