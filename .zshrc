@@ -2,7 +2,7 @@ umask 002
 
 # 入力補完
 autoload -U compinit
-compinit
+compinit -u
 
 # プロンプト表示 {{{
 PROMPT=$'%{\e[31m%}%n@%M %{\e[33m%}%* %# %{\e[m%}'
@@ -58,9 +58,6 @@ bindkey "^R" history-incremental-pattern-search-backward
 bindkey "^S" history-incremental-pattern-search-forward
 # }}}
 
-# MqcPorts
-export PATH=/opt/local/bin:/opt/local/sbin:$PATH
-
 #mac image preview
 alias ql='qlmanage -p "$@" >& /dev/null'
 alias imgsize="mdls -name kMDItemPixelWidth -name kMDItemPixelHeight"
@@ -81,10 +78,10 @@ if type docker-machine > /dev/null 2>&1;
 #    fi
     then eval "$(docker-machine env dev)"
 fi
+export DOCKER_API_VERSION=1.22
 
-#php
-export PATH="$(brew --prefix homebrew/php/php56)/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
+#lua
+export PATH="$(brew --prefix homebrew/versions/lua53)/bin:$PATH"
 
 if [[ -s ~/.nvm/nvm.sh ]];
   then source ~/.nvm/nvm.sh
@@ -98,9 +95,8 @@ if type pythonbrew > /dev/null 2>&1;
     source ~/.pythonbrew/bin/virtualenvwrapper.sh
 fi
 
-export PATH="$PATH:/Users/shouji/Library/Android/sdk/tools"
-export PATH="$PATH:/Users/shouji/Library/Android/sdk/platform-tools"
-
+export PATH="$PATH:/Users/$(whoami)/Library/Android/sdk/tools"
+export PATH="$PATH:/Users/$(whoami)/Library/Android/sdk/platform-tools"
 
 if [[ "$OSTYPE" =~ darwin ]];then
   jscpath="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources"
