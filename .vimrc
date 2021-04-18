@@ -1,8 +1,11 @@
+set binary noeol
 "dependent {{{
 if filereadable( $HOME . "/.vimrc.dependent" )
       source ~/.vimrc.dependent
 endif
 " }}}
+
+set clipboard=unnamed,autoselect
 
 " Search {{{
 set incsearch "インクリメンタルサーチを行う
@@ -68,7 +71,8 @@ set expandtab "タブの代わりに空白文字を挿入する
 set backspace=2 "deleteキー削除
 " }}}
 
-
+" sudo忘れ
+cnoremap w!! w !sudo tee > /dev/null %<CR> :e!<CR>
 "===============================
 "vimプラグイン管理 for neobundle
 "
@@ -93,6 +97,8 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'thinca/vim-ref'
 NeoBundle 'heavenshell/vim-slack'
 NeoBundle 'mattn/webapi-vim'
+NeoBundle 'leafgarland/typescript-vim'
+NeoBundle 'Quramy/tsuquyomi'
 "
 ""Brief help
 ":NeoBundleList
@@ -142,6 +148,14 @@ let g:syntastic_php_checkers = ['php', 'phpcs', 'phpmd']
 
 "vim-ref
 let g:ref_phpmanual_path = $HOME."/.vim/refs/php-chunked-xhtml"
+
+"typescript
+let g:typescript_indent_disable = 1
+autocmd QuickFixCmdPost [^l]* nested cwindow
+autocmd QuickFixCmdPost    l* nested lwindow
+let g:tsuquyomi_completion_detail = 1
+autocmd FileType typescript setlocal completeopt-=menu
+let g:syntastic_typescript_tsc_args = "--experimentalDecorators"
 
 " unite.vim {{{ 
 "" 入力モードで開始する

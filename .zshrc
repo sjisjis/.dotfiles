@@ -3,6 +3,7 @@ umask 002
 # 入力補完
 autoload -U compinit
 compinit -u
+fpath=(~/.zsh/completion $fpath)
 
 # プロンプト表示 {{{
 PROMPT=$'%{\e[31m%}%n@%M %{\e[33m%}%* %# %{\e[m%}'
@@ -66,37 +67,19 @@ alias imgsize="mdls -name kMDItemPixelWidth -name kMDItemPixelHeight"
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting$
 
 #bin
-export PATH=~/bin:$PATH
-export EDITOR='subl -w'
-export JAVA_HOME=`/System/Library/Frameworks/JavaVM.framework/Versions/A/Commands/java_home -v "1.7"`
+unset JAVA_HOME;
+export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_151`
 PATH=${JAVA_HOME}/bin:${PATH}
 
-#docker-machine
-if type docker-machine > /dev/null 2>&1;
-#    if [[ `docker-machine status dev` -eq 'Stopped' ]];
-#        then docker-machine start dev;
-#    fi
-    then eval "$(docker-machine env dev)"
-fi
-export DOCKER_API_VERSION=1.22
-
-#lua
-export PATH="$(brew --prefix homebrew/versions/lua53)/bin:$PATH"
 
 if [[ -s ~/.nvm/nvm.sh ]];
   then source ~/.nvm/nvm.sh
 fi
 
-#pythonbrew
-if type pythonbrew > /dev/null 2>&1;
-  then
-    [[ -s "$HOME/.pythonbrew/etc/bashrc" ]] && source "$HOME/.pythonbrew/etc/bashrc"
-    VIRTUALENVWRAPPER_PYTHON=py2.7.3
-    source ~/.pythonbrew/bin/virtualenvwrapper.sh
-fi
-
-export PATH="$PATH:/Users/$(whoami)/Library/Android/sdk/tools"
-export PATH="$PATH:/Users/$(whoami)/Library/Android/sdk/platform-tools"
+export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
+export PATH="$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/tools:$PATH"
+export PATH="$PATH:$ANDROID_SDK_ROOT/tools"
+export PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools"
 
 if [[ "$OSTYPE" =~ darwin ]];then
   jscpath="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources"
@@ -104,3 +87,19 @@ if [[ "$OSTYPE" =~ darwin ]];then
     export PATH=$PATH:$jscpath
   fi
 fi
+
+export PATH="$HOME/.yarn/bin:$PATH"
+
+#Rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
+#mysql
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+
+
+#sdkman
+export SDKMAN_DIR="/Users/shouji/.sdkman"
+[[ -s "/Users/shouji/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/shouji/.sdkman/bin/sdkman-init.sh"
+
+#flutter
+export PATH="$PATH:$HOME/app/flutter/bin"
