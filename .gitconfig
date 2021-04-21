@@ -2,7 +2,6 @@
 	name = sjisjis
 	email = shouji.takumi@gmail.com
 [core]
-	excludesfile = /Users/shouji/.gitignore_global
 	editor = vim
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"

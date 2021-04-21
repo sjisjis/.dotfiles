@@ -67,10 +67,10 @@ alias imgsize="mdls -name kMDItemPixelWidth -name kMDItemPixelHeight"
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting$
 
 #bin
-unset JAVA_HOME;
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8.0_151`
+export JAVA_HOME=`/usr/libexec/java_home -v "1.8"`
 PATH=${JAVA_HOME}/bin:${PATH}
-
+#export PATH="$HOME/.jenv/bin:$PATH"
+#eval "$(jenv init -)"
 
 if [[ -s ~/.nvm/nvm.sh ]];
   then source ~/.nvm/nvm.sh
@@ -103,3 +103,5 @@ export SDKMAN_DIR="/Users/shouji/.sdkman"
 
 #flutter
 export PATH="$PATH:$HOME/app/flutter/bin"
+
+export PATH="$HOME/bin:$PATH"

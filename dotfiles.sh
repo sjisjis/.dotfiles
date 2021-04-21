@@ -13,8 +13,12 @@ do
     [ $i = ".git" ] && continue
     [ $i = "README.md" ] && continue
     echo $i
+    if [ $i = ".gitignore" ]; then
+        ln -snfv ~/.dotfiles/$i ~/.config/git/ignore
+    fi
     ln -snfv ~/.dotfiles/$i ~/
 done
+
 vim -c ':NeoBundleInstall!' -c ':q!' -c ':q!'
 if [ `uname` = "Darwin" ]; then
     pushd ~/.dotfiles/.vim/bundle/vimproc
