@@ -67,7 +67,7 @@ alias imgsize="mdls -name kMDItemPixelWidth -name kMDItemPixelHeight"
 PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting$
 
 #bin
-export JAVA_HOME=`/usr/libexec/java_home -v "1.8"`
+export JAVA_HOME=`/usr/libexec/java_home -v "1.8.0_292"`
 PATH=${JAVA_HOME}/bin:${PATH}
 #export PATH="$HOME/.jenv/bin:$PATH"
 #eval "$(jenv init -)"
@@ -93,6 +93,10 @@ export PATH="$HOME/.yarn/bin:$PATH"
 #Rust
 export PATH="$HOME/.cargo/bin:$PATH"
 
+#Go
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
+
 #mysql
 export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
 
@@ -103,5 +107,4 @@ export SDKMAN_DIR="/Users/shouji/.sdkman"
 
 #flutter
 export PATH="$PATH:$HOME/app/flutter/bin"
-
 export PATH="$HOME/bin:$PATH"

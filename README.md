@@ -1,2 +1,4 @@
-dotfiles
-========
+# dotfiles
+```sh
+./dotfiles.sh
+```

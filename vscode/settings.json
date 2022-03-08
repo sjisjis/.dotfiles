@@ -1,0 +1,69 @@
+{
+    "window.zoomLevel": 1,
+    /* editor */
+    "editor.detectIndentation": false,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.renderWhitespace": "all",
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "editor.formatOnPaste": true,
+    "editor.lineNumbers": "on",
+    "editor.wordSeparators": "/\\()\"':,.;<>~!@#%^&*|+=[]{}`?-",
+    "editor.wordWrap": "off",
+    "editor.bracketPairColorization.enabled": true,
+    //"editor.largeFileOptimizations": false, //巨大ファイルのシンタックス有効化
+    /* vim */
+    "vim.useSystemClipboard": true,
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "~/.vimrc",
+    /* files */
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 1,
+    "files.associations": {
+        "*.{inc}": "php",
+        "*.{twig,volt,tpl}": "html",
+    },
+    /* emmet */
+    "emmet.excludeLanguages": [
+        "markdown"
+    ],
+    "emmet.variables": {
+        "lang": "ja"
+    },
+    /* lang */
+    "[json]": {
+        "editor.quickSuggestions": {
+            "strings": true,
+            "comments": false,
+            "other": true
+        },
+        "editor.suggest.insertMode": "replace",
+        "gitlens.codeLens.scopes": [
+            "document"
+        ]
+    },
+    "[php]": {
+        "editor.tabSize": 4,
+    },
+    "[javascript]": {
+        "editor.tabSize": 2,
+    },
+    "[css]": {
+        "editor.tabSize": 2,
+    },
+    "[html]": {
+        "editor.tabSize": 2,
+    },
+    "[yml]": {
+        "editor.tabSize": 2,
+    },
+    "[rust]": {
+        "editor.defaultFormatter": "rust-lang.rust",
+        "editor.tabSize": 4,
+    },
+    "[go]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": false, // default tab
+    },
+}
