@@ -1,5 +1,5 @@
 {
-    "window.zoomLevel": 1,
+    "window.zoomLevel": 2,
     /* editor */
     "editor.detectIndentation": false,
     "editor.tabSize": 4,
@@ -17,6 +17,9 @@
     "vim.useSystemClipboard": true,
     "vim.vimrc.enable": true,
     "vim.vimrc.path": "~/.vimrc",
+    /* neovim :vscode-vimは無効化, asvetliakov.vscode-neovimを使用 */
+    "vscode-neovim.neovimExecutablePaths.darwin": "/usr/local/bin/nvim",
+    "vscode-neovim.neovimInitVimPaths.darwin": "Users/${USER}/.config/nvim/init.vim",
     /* files */
     "files.autoSave": "afterDelay",
     "files.autoSaveDelay": 1,

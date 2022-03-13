@@ -33,7 +33,7 @@ alias ll='ls -la --color'
 esac
 
 alias grep="grep --color=auto"
-alias vi='vim'
+alias vi='nvim'
 # }}}
 
 # History {{{
@@ -63,48 +63,8 @@ bindkey "^S" history-incremental-pattern-search-forward
 alias ql='qlmanage -p "$@" >& /dev/null'
 alias imgsize="mdls -name kMDItemPixelWidth -name kMDItemPixelHeight"
 
-#rvm
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting$
-
-#bin
-export JAVA_HOME=`/usr/libexec/java_home -v "1.8.0_292"`
-PATH=${JAVA_HOME}/bin:${PATH}
-#export PATH="$HOME/.jenv/bin:$PATH"
-#eval "$(jenv init -)"
-
-if [[ -s ~/.nvm/nvm.sh ]];
-  then source ~/.nvm/nvm.sh
+if [ -f ~/.dotfiles/.zshrc-export-path ]; then
+  source ~/.dotfiles/.zshrc-export-path
+  # Rust: export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
-export ANDROID_SDK_ROOT="$HOME/Library/Android/sdk"
-export PATH="$ANDROID_SDK_ROOT/emulator:$ANDROID_SDK_ROOT/tools:$PATH"
-export PATH="$PATH:$ANDROID_SDK_ROOT/tools"
-export PATH="$PATH:$ANDROID_SDK_ROOT/platform-tools"
-
-if [[ "$OSTYPE" =~ darwin ]];then
-  jscpath="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources"
-  if [ -f $jscpath/jsc ];then
-    export PATH=$PATH:$jscpath
-  fi
-fi
-
-export PATH="$HOME/.yarn/bin:$PATH"
-
-#Rust
-export PATH="$HOME/.cargo/bin:$PATH"
-
-#Go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
-#mysql
-export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
-
-
-#sdkman
-export SDKMAN_DIR="/Users/shouji/.sdkman"
-[[ -s "/Users/shouji/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/shouji/.sdkman/bin/sdkman-init.sh"
-
-#flutter
-export PATH="$PATH:$HOME/app/flutter/bin"
-export PATH="$HOME/bin:$PATH"
