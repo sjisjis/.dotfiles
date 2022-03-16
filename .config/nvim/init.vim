@@ -11,4 +11,9 @@ endif
 
 call plug#begin('~/.local/share/nvim')
   Plug 'neoclide/coc.nvim', {'branch': 'release'} "node required
+  Plug 'preservim/nerdtree'
 call plug#end()
+
+" nerdtree
+map <C-n> :NERDTreeToggle<CR>
+let NERDTreeShowHidden = 1
