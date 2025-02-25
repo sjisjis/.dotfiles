@@ -1,3 +1,5 @@
+# Amazon Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.pre.zsh"
 umask 002
 
 # 入力補完
@@ -32,9 +34,13 @@ alias ll='ls -la --color'
 ;;
 esac
 
-alias grep="grep --color=auto"
+#alias grep="grep --color=auto"
 alias vi='nvim'
 # }}}
+
+#docker
+alias d-rm-ps='docker rm -f $(docker ps -qa)'
+alias d-rm-img='docker rmi -f $(docker images -qa)'
 
 # History {{{
 HISTFILE=$HOME/.zsh_history
@@ -68,3 +74,24 @@ if [ -f ~/.dotfiles/.zshrc-export-path ]; then
   # Rust: export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
+eval "$(nodenv init -)"
+
+# awsp
+#function awsp() {
+#  if [ $# -ge 1 ]; then
+#    export AWS_PROFILE="$1"
+#    echo "Set AWS_PROFILE=$AWS_PROFILE."
+#  else
+#    source _awsp
+#  fi
+#  export AWS_DEFAULT_PROFILE=$AWS_PROFILE
+#}
+alias awsp='export AWS_PROFILE=$(aws configure list-profiles | fzf)'
+
+source /Users/takumishoji/.docker/init-zsh.sh || true # Added by Docker Desktop
+
+
+[[ -f "$HOME/fig-export/dotfiles/dotfile.zsh" ]] && builtin source "$HOME/fig-export/dotfiles/dotfile.zsh"
+
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/amazon-q/shell/zshrc.post.zsh"

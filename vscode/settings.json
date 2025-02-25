@@ -1,6 +1,5 @@
 {
-    "window.zoomLevel": 2,
-    /* editor */
+    "github.copilot.language": "ja",
     "editor.detectIndentation": false,
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
@@ -26,6 +25,7 @@
     "files.associations": {
         "*.{inc}": "php",
         "*.{twig,volt,tpl}": "html",
+        "Dockerfile": "dockerfile"
     },
     /* emmet */
     "emmet.excludeLanguages": [
@@ -69,4 +69,25 @@
         "editor.tabSize": 4,
         "editor.insertSpaces": false, // default tab
     },
+    "window.zoomLevel": 2,
+    "terminal.integrated.env.osx": {
+        "FIG_NEW_SESSION": "1",
+        "Q_NEW_SESSION": "1"
+    },
+    "editor.accessibilitySupport": "off",
+    "github.copilot.enable": {
+        "*": false,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "terraform": true
+    },
+    "extensions.experimental.affinity": {
+        "asvetliakov.vscode-neovim": 1
+    },
+    "search.useIgnoreFiles": false,
+    "go.toolsManagement.autoUpdate": true,
+    "codestream.email": "shoji.takumi@bell-face.com",
+    "json.schemas": [],
+    "hediet.vscode-drawio.resizeImages": null,
 }
