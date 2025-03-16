@@ -69,4 +69,9 @@
         "editor.tabSize": 4,
         "editor.insertSpaces": false, // default tab
     },
+    "makefile.configureOnOpen": true,
+    "terminal.integrated.env.osx": {
+        "Q_NEW_SESSION": "1"
+    },
+    "editor.accessibilitySupport": "on",
 }
