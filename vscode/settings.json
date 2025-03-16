@@ -1,6 +1,4 @@
 {
-    "window.zoomLevel": 2,
-    /* editor */
     "editor.detectIndentation": false,
     "editor.tabSize": 4,
     "editor.insertSpaces": true,
@@ -69,4 +67,5 @@
         "editor.tabSize": 4,
         "editor.insertSpaces": false, // default tab
     },
+    "hediet.vscode-drawio.resizeImages": null,
 }
