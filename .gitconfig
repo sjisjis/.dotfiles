@@ -1,6 +1,7 @@
 [user]
 	name = sjisjis
 	email = shouji.takumi@gmail.com
+	signingkey = ~/.ssh/id_ed25519.pub
 [core]
 	editor = vim
 [difftool "sourcetree"]
@@ -14,6 +15,7 @@
 [alias]
 	co = checkout
 	ci = commit
+	cis = commit -S  # 署名付きコミット (OSS向け)
 	st = status
 	gr = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s';
 [filter "lfs"]
@@ -23,3 +25,13 @@
 	process = git-lfs filter-process
 [credential]
 	helper = osxkeychain
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[pull]
+	rebase = false
+[gpg]
+	format = ssh
+[commit]
+	gpgsign = false
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/allowed_signers

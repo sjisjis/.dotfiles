@@ -25,4 +25,16 @@
         "command": "workbench.action.files.save",
         "when": "neovim.mode == normal && editorTextFocus",
     },
+    {
+        "key": "cmd+i",
+        "command": "composerMode.agent"
+    },
+    {
+        "key": "shift+enter",
+        "command": "workbench.action.terminal.sendSequence",
+        "args": {
+            "text": "\\\r\n"
+        },
+        "when": "terminalFocus"
+    },
 ]

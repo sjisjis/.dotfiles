@@ -74,4 +74,7 @@
         "Q_NEW_SESSION": "1"
     },
     "editor.accessibilitySupport": "on",
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "workbench.settings.applyToAllProfiles": [],
+    "claudeCode.preferredLocation": "panel",
 }

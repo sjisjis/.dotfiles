@@ -1,9 +1,11 @@
+# Kiro CLI pre block. Keep at the top of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.pre.zsh"
 umask 002
 
 # 入力補完
+fpath=(~/.zsh/completion $fpath)
 autoload -U compinit
 compinit -u
-fpath=(~/.zsh/completion $fpath)
 
 # プロンプト表示 {{{
 PROMPT=$'%{\e[31m%}%n@%M %{\e[33m%}%* %# %{\e[m%}'
@@ -34,6 +36,20 @@ esac
 
 alias grep="grep --color=auto"
 alias vi='nvim'
+alias tf="aws-vault exec ${AWS_PROFILE} -- terraform"
+alias sz="source ~/.zshrc"
+
+function awsp() {
+  local profile=$(aws configure list-profiles | fzf --height 40% --reverse --prompt="AWS Profile > ")
+
+  if [ -n "$profile" ]; then
+    export AWS_PROFILE=$profile
+    echo "✅ Switched to: $AWS_PROFILE"
+
+    aws sso login
+  fi
+
+}
 # }}}
 
 # History {{{
@@ -68,3 +84,15 @@ if [ -f ~/.dotfiles/.zshrc-export-path ]; then
   # Rust: export PATH="$HOME/.cargo/bin:$PATH"
 fi
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+export PATH="$HOME/.claude/local:$PATH"
+eval "$(sheldon source)"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# Kiro CLI post block. Keep at the bottom of this file.
+[[ -f "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/Library/Application Support/kiro-cli/shell/zshrc.post.zsh"
