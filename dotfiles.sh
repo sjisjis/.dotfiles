@@ -19,6 +19,14 @@ if [ `uname` = "Darwin" ]; then
       elif [ $i = "vscode" ]; then
           ln -snfv ~/.dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/
           ln -snfv ~/.dotfiles/vscode/keybindings.json ~/Library/Application\ Support/Code/User/
+      elif [ $i = ".claude" ]; then
+          mkdir -p ~/.claude
+          ln -snfv ~/.dotfiles/.claude/settings.json ~/.claude/settings.json
+          ln -snfv ~/.dotfiles/.claude/statusline-command.sh ~/.claude/statusline-command.sh
+          for d in agents commands skills hooks output-styles; do
+              ln -snfv ~/.dotfiles/.claude/$d ~/.claude/$d
+          done
+          continue
       fi
       ln -snfv ~/.dotfiles/$i ~/
   done
