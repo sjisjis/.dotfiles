@@ -10,6 +10,19 @@
       "Bash(terraform providers schema *)",
       "Bash(gh pr *)",
       "mcp__claude_ai_Notion__notion-fetch"
+    ],
+    "deny": [
+      "Read(.env)",
+      "Read(.env*.local)",
+      "Edit(.env)",
+      "Edit(.env*.local)",
+      "Read(**/config/master.key)",
+      "Edit(**/config/master.key)",
+      "Read(**/config/credentials.yml.enc)",
+      "Edit(**/config/credentials.yml.enc)",
+      "Read(**/*.pem)",
+      "Read(**/id_rsa)",
+      "Read(**/id_ed25519)"
     ]
   },
   "model": "claude-fable-5[1m]",
@@ -19,6 +32,26 @@
   },
   "enabledPlugins": {
     "security-guidance@claude-plugins-official": true
+  },
+  "spinnerVerbs": {
+    "mode": "replace",
+    "verbs": [
+      "がんばりよるけん",
+      "考えよるっちゃん",
+      "ちょっと待っとってね",
+      "調べよるばい",
+      "ごりごりやりよるけん",
+      "もうちょっとやけん",
+      "気合い入れとるばい",
+      "ばりばり書きよるけん",
+      "よかアイデア探しよる",
+      "めっちゃ集中しとるけん",
+      "なんとかするけん",
+      "いっちょやってみるばい",
+      "よかろうもん",
+      "しゃーしいけど頑張るばい",
+      "なんしようと考え中"
+    ]
   },
   "theme": "dark"
 }
