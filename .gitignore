@@ -1,7 +1,6 @@
 .DS_Store
 .zshrc-export-path
 .claude/settings.local.json
-/statusline/
 
 /.config/*
 

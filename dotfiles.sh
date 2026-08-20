@@ -23,6 +23,7 @@ if [ `uname` = "Darwin" ]; then
           mkdir -p ~/.claude
           ln -snfv ~/.dotfiles/.claude/settings.json ~/.claude/settings.json
           ln -snfv ~/.dotfiles/.claude/statusline-command.sh ~/.claude/statusline-command.sh
+          ln -snfv ~/.dotfiles/.claude/CLAUDE.md ~/.claude/CLAUDE.md
           for d in agents commands skills hooks output-styles; do
               ln -snfv ~/.dotfiles/.claude/$d ~/.claude/$d
           done
