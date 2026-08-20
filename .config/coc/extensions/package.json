@@ -2,5 +2,7 @@
   "dependencies": {
     "coc-go": ">=1.1.0",
     "coc-phpls": ">=2.2.2"
-  }
+  },
+  "disabled": [],
+  "locked": []
 }
