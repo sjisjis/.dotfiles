@@ -1,30 +1,15 @@
 {
   "permissions": {
     "allow": [
-      "Bash(chmod +x /Users/takumishoji/app/enechange/sre-devtools/scripts/lib.sh /Users/takumishoji/app/enechange/sre-devtools/scripts/aws/update-accounts.sh /Users/takumishoji/app/enechange/sre-devtools/scripts/aws/carbon.sh)",
-      "Bash(chmod +x /Users/takumishoji/app/enechange/sre-devtools/scripts/github/teams.sh)",
-      "Bash(chmod +x /Users/takumishoji/app/enechange/sre-devtools/scripts/aws/rds.sh /Users/takumishoji/app/enechange/sre-devtools/scripts/aws/elasticache.sh /Users/takumishoji/app/enechange/sre-devtools/scripts/aws/ri-rds.sh /Users/takumishoji/app/enechange/sre-devtools/scripts/aws/ri-elasticache.sh /Users/takumishoji/app/enechange/sre-devtools/scripts/aws/sp.sh)",
-      "Bash(find ~/.terraform.d /Users/takumishoji/app/enechange/terraform/cto-config -iname \"*terraform-provider-github*\" -type f 2>/dev/null | head)",
       "Read(//Users/takumishoji/.terraform.d/**)",
       "Bash(grep -E \"^github_[a-z_]+$\")",
       "Bash(terraform fmt *)",
       "Bash(terraform validate *)",
-      "Bash(cd /Users/takumishoji/app/enechange/terraform/enechange-config *)",
-      "Read(//Users/takumishoji/app/enechange/terraform/**)",
       "Bash(terraform plan *)",
-      "Bash(mkdir -p /Users/takumishoji/app/enechange/terraform/enechange-config/../terraform-modules/cost-tags)",
-      "Read(//Users/takumishoji/app/enechange/terraform/terraform-modules/**)",
-      "Bash(cp /Users/takumishoji/app/enechange/terraform/enechange-config/tagging/cost_tags.yaml /Users/takumishoji/app/enechange/terraform/enechange-config/../terraform-modules/cost-tags/cost_tags.yaml)",
-      "Bash(cd /Users/takumishoji/app/enechange/terraform/enechange-config/../terraform-modules/cost-tags *)",
-      "Read(//Users/takumishoji/app/enechange/terraform/terraform-modules/cost-tags/**)",
-      "Bash(gh pr *)",
       "Bash(terraform init *)",
-      "Bash(ruby -ryaml -e ' *)",
       "Bash(terraform providers schema *)",
+      "Bash(gh pr *)",
       "mcp__claude_ai_Notion__notion-fetch"
-    ],
-    "additionalDirectories": [
-      "/Users/takumishoji/app/enechange/terraform/terraform-modules/cost-tags"
     ]
   },
   "model": "claude-fable-5[1m]",

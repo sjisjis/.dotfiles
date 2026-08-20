@@ -67,6 +67,19 @@
 (Claude Code の `fewer-permission-prompts` スキル)でセッション履歴から使用頻度を集計し、
 上記基準に沿って `permissions.allow` に追記する。
 
+### 社内固有パスを含む許可ルールは置かない
+
+`/Users/takumishoji/app/enechange/...` のような特定プロジェクトのパス・社名・リポジトリ構成を
+含む許可ルールは、この `settings.json`(dotfilesリポジトリ、他マシンとも共有)には**追加しない**。
+
+- そのプロジェクト自身の `<project>/.claude/settings.local.json` に書く
+  (Claude Code が userSettings / projectSettings / localSettings を自動でマージするため、
+  動作は変わらない)
+- `settings.local.json` は `~/.config/git/ignore`(=このリポジトリの `.gitignore` をグローバル
+  excludesFile として使う設定)により、どのリポジトリでも自動的にgit管理対象外になる
+- 迷ったら「このルールにプロジェクト名・社名・機密っぽいパスが含まれるか」を基準にする。
+  含まれるなら dotfiles 側ではなく該当プロジェクト側に置く
+
 ## 反映方法
 
 `dotfiles.sh` 実行時、`.claude` ディレクトリはシンボリックリンクせず、
