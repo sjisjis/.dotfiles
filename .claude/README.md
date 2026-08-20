@@ -75,10 +75,51 @@
 
 ### 表示されない場合
 
-- **5h / 7d が出ない**: `rate_limits` はセッション最初のAPIレスポンス以降に渡されるため、それまでは非表示。
-  またレートリミットではなくusage creditsで動いている場合も渡されないことがある
+- **5h / 7d が出ない**: `rate_limits` は「Claude.aiサブスクリプション契約者の、セッション最初のAPIレスポンス以降」
+  にのみ渡される。それ以前は非表示。またサブスクリプションではなくusage creditsで動いている場合も渡されない
 - **🐙 が出ない**: gitリポジトリ外にいる場合は省略される
 - **☠ が出ない**: 該当するゾンビプロセスがない、または前回チェックから2時間経っていない(正常)
+
+### レートリミット(5h/7d)と支出上限(spend limit)は別物
+
+`5h: 8%` のように余裕があるのに `You've hit your individual spend limit` と出ることがあるが、
+これは矛盾ではなく、2つが別のメーターだから。
+
+| | ステータスラインの `5h` / `7d` | 個人の支出上限 |
+|---|---|---|
+| 単位 | 使用量(トークン/リクエスト) | 金額(USD) |
+| 出どころ | Claude.aiサブスクリプションの枠 | 組織管理者が設定した usage credits の上限 |
+| リセット | ローリング5時間 / 7日で自動 | 管理者が引き上げるまで解除されない |
+| 表示可否 | statuslineのJSONに含まれる | **JSONに該当フィールドが無く表示できない** |
+
+`/model` で「Draws from usage credits」と表示されるモデル(Fable 5 など)は後者を消費するため、
+レートリミットをほとんど使っていなくても支出上限に先に到達しうる。
+対処は `/usage-credits` で管理者に上限引き上げを依頼するか、usage creditsを消費しないモデル
+(Opus 5 / Sonnet 5 など)に切り替える。
+
+### statuslineに渡されるJSONの主なフィールド
+
+表示項目を増やしたいときの参照用。完全な定義は Claude Code 本体が内蔵しており、
+`strings $(readlink -f $(which claude)) | grep -n 'How to use the statusLine command'` 付近で確認できる。
+
+| フィールド | 内容 |
+|---|---|
+| `model.display_name` / `model.id` | モデル表示名 / モデルID |
+| `context_window.used_percentage` / `remaining_percentage` | コンテキスト使用率 / 残り率(0-100、メッセージ前は null) |
+| `context_window.total_input_tokens` / `total_output_tokens` | 入力トークン数(キャッシュ読み書き込み) / 直近レスポンスの出力トークン数 |
+| `context_window.context_window_size` | 現在のモデルのコンテキストサイズ(例: 200000) |
+| `context_window.current_usage.*` | 直近API呼び出しの `input_tokens`, `output_tokens`, `cache_creation_input_tokens`, `cache_read_input_tokens` |
+| `rate_limits.five_hour.used_percentage` / `.resets_at` | 5時間枠の使用率 / リセット時刻(**Unix epoch秒**) |
+| `rate_limits.seven_day.used_percentage` / `.resets_at` | 7日枠の使用率 / リセット時刻(同上) |
+| `cost.total_cost_usd` | セッション累計コスト |
+| `effort.level` | reasoning effort(`low`〜`max`)。対応モデルのみ |
+| `thinking.enabled` | 拡張思考の有効/無効 |
+| `pr.number` / `pr.review_state` | 現在のブランチのPR番号 / レビュー状態(`approved` など) |
+| `workspace.repo.{host,owner,name}` / `workspace.git_worktree` | リポジトリ識別情報 / worktree名 |
+| `session_id` / `session_name` / `version` / `output_style.name` | セッションID / `/rename` で付けた名前 / アプリバージョン / 出力スタイル |
+
+`rate_limits` は `used_percentage` と `resets_at` の2つしか無く、すでに両方表示しているため
+追加できる項目はない。
 
 ## permissions.allow の運用方針(許可プロンプトを減らす)
 
