@@ -1,8 +1,8 @@
 #!/bin/bash
 # Claude Code status line (2 lines)
 #
-# Line 1: [model] context% | cost
-# Line 2: 5h limit (reset + remaining + pace advice) | 7d limit | zombie | git branch | dir | elapsed
+# Line 1: [model] context% (used/size) | cost
+# Line 2: 5h limit (reset + remaining + pace advice) | 7d limit | zombie | git branch | PR | dir | elapsed
 
 input=$(cat)
 now_ts=$(date +%s)
@@ -20,6 +20,7 @@ ICON_MONEY="💰"
 ICON_5H="⏱️"
 ICON_7D="📅"
 ICON_GIT="🐙"
+ICON_PR="🔀"
 ICON_DIR="📁"
 ICON_TIME="⏳"
 
@@ -56,6 +57,20 @@ local_hm() {
   date -r "$1" "+%H:%M" 2>/dev/null
 }
 
+# トークン数を 1234 -> 1k, 190000 -> 190k, 1000000 -> 1M の形に丸める
+fmt_tokens() {
+  awk -v n="$1" 'BEGIN {
+    if (n >= 1000000) {
+      v = n / 1000000
+      if (v == int(v)) printf "%dM", v; else printf "%.1fM", v
+    } else if (n >= 1000) {
+      printf "%dk", n / 1000
+    } else {
+      printf "%d", n
+    }
+  }'
+}
+
 # epoch -> local "M/D HH:MM" (no leading zeros on month/day)
 local_mdhm() {
   local epoch="$1" m d hm
@@ -70,7 +85,11 @@ local_mdhm() {
 
 model_name=$(jq -r '.model.display_name // "unknown"' <<<"$input")
 context_pct=$(jq -r '((.context_window.used_percentage // 0) | round)' <<<"$input")
+ctx_used_tokens=$(jq -r '((.context_window.total_input_tokens // 0) | round)' <<<"$input")
+ctx_size=$(jq -r '((.context_window.context_window_size // 0) | round)' <<<"$input")
 cost_usd=$(jq -r '(.cost.total_cost_usd // 0)' <<<"$input")
+pr_number=$(jq -r '.pr.number // ""' <<<"$input")
+pr_review_state=$(jq -r '.pr.review_state // ""' <<<"$input")
 cwd=$(jq -r '.workspace.current_dir // .cwd // "."' <<<"$input")
 session_id=$(jq -r '.session_id // ""' <<<"$input")
 
@@ -93,7 +112,12 @@ elif [ "$context_pct" -ge 50 ]; then
   context_color="$YELLOW"
 fi
 
-line1="[${model_name}] ${ICON_BRAIN} ${context_color}${context_pct}%${RESET} | ${ICON_MONEY} \$${cost_fmt}"
+ctx_detail=""
+if [ "$ctx_size" -gt 0 ] 2>/dev/null; then
+  ctx_detail=" ($(fmt_tokens "$ctx_used_tokens")/$(fmt_tokens "$ctx_size"))"
+fi
+
+line1="[${model_name}] ${ICON_BRAIN} ${context_color}${context_pct}%${RESET}${ctx_detail} | ${ICON_MONEY} \$${cost_fmt}"
 
 # --- line 2: rate limits + zombie + git + dir + elapsed -----------------
 
@@ -166,6 +190,19 @@ if git -C "$cwd" --no-optional-locks rev-parse --is-inside-work-tree >/dev/null 
     fi
     segments+=("${ICON_GIT} ${branch}${dirty}")
   fi
+fi
+
+# 現在のブランチに対応するPR(あれば)
+if [ -n "$pr_number" ]; then
+  case "$pr_review_state" in
+    approved)          pr_color="$GREEN" ;;
+    changes_requested) pr_color="$RED" ;;
+    pending)           pr_color="$YELLOW" ;;
+    *)                 pr_color="" ;;
+  esac
+  pr_str="${ICON_PR} #${pr_number}"
+  [ -n "$pr_review_state" ] && pr_str="${pr_str} ${pr_color}${pr_review_state}${RESET}"
+  segments+=("$pr_str")
 fi
 
 dir_name=$(basename "$cwd")
