@@ -15,7 +15,7 @@ ICON_BRAIN="🧠"
 ICON_MONEY="💰"
 ICON_5H="⏱️"
 ICON_7D="📅"
-ICON_GIT="🌿"
+ICON_GIT="🐙"
 ICON_DIR="📁"
 
 # --- helpers -----------------------------------------------------------
