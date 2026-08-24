@@ -28,7 +28,8 @@
 - `settings.json` — permissions, model, statusLine, enabledPlugins などのユーザー設定
 - `statusline-command.sh` — ステータスライン表示用スクリプト
 - `CLAUDE.md` — 全プロジェクト共通のグローバル指示(push前の確認方針など)
-- `settings.json` の `hooks.Stop` — 応答完了時に `afplay` でシステムサウンドを再生する通知
+- `settings.json` の `hooks.Stop` / `hooks.Notification` — 応答完了時(Glass)・許可確認待ち時(Sosumi)に
+  それぞれ別のシステムサウンドと通知バナーで気づけるようにする
 - `agents/`, `commands/`, `skills/`, `hooks/`, `output-styles/` — 現時点では未使用だが、
   将来ここにカスタム設定を置くことを想定した空ディレクトリ(`.gitkeep` で存在だけ確保)。
   `dotfiles.sh` は `~/.claude/<dir>` をこのディレクトリへのシンボリックリンクとして作成するため、

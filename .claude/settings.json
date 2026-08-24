@@ -39,7 +39,17 @@
         "hooks": [
           {
             "type": "command",
-            "command": "afplay /System/Library/Sounds/Glass.aiff 2>/dev/null || true"
+            "command": "afplay /System/Library/Sounds/Glass.aiff 2>/dev/null; osascript -e 'display notification \"応答が完了しました\" with title \"Claude Code\"' 2>/dev/null || true"
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "afplay /System/Library/Sounds/Sosumi.aiff 2>/dev/null; osascript -e 'display notification \"操作の許可を確認しています\" with title \"Claude Code\"' 2>/dev/null || true"
           }
         ]
       }
